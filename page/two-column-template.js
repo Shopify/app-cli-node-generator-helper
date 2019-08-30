@@ -4,7 +4,7 @@ const createTwoColumnTemplate = handle => {
   const componentName = toPascalCase(handle);
   return `import { Card, Layout } from '@shopify/polaris';
 
-const ${componentName} (
+const ${componentName} = () => (
         <Layout>
           <Layout.Section oneHalf>
             <Card>

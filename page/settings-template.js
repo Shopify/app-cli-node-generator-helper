@@ -4,7 +4,7 @@ const createSettingsPageTemplate = handle => {
   const componentName = toPascalCase(handle);
   return `import { Card, Layout, Page } from '@shopify/polaris';
 
-const ${componentName} (
+const ${componentName} = () => (
     <Page>
       <Layout>
         <Layout.AnnotatedSection
