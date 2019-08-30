@@ -1,0 +1,19 @@
+{
+  "name": "@shopify/app-cli-node-generator-helper",
+  "version": "1.0.0",
+  "description": "helpers to generate code for shopify-app-node",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shopify/app-cli-node-generator-helper.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bin": {
+    "generate-node-app": "./index.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Shopify/app-cli-node-generator-helper/issues"
+  },
+  "homepage": "https://github.com/Shopify/app-cli-node-generator-helper#readme"
+}
