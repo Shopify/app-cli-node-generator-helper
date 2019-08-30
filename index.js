@@ -4,12 +4,6 @@ function receiveArgs(args) {
   console.log(args)
   const type = args[2];
   switch (type) {
-    case "generate-page": {
-      const generatePage = require("./page/generate-page");
-      const createPageTemplate = require("./page/page-template");
-      generatePage(createPageTemplate, "pages", args);
-      break;
-    }
     case "generate-empty-state-page": {
       const generatePage = require("./page/generate-page");
       const createEmptyStateTemplate = require("./page/empty-state-template");

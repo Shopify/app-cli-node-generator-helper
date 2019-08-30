@@ -1,18 +1,20 @@
 const fs = require("fs");
 const generatePage = require("../page/generate-page");
 
-const content = `import { Heading, Page } from \"@shopify/polaris\";
-
+const content = `import { EmptyState, Page } from "@shopify/polaris";
 const Index = () => (
   <Page>
-    <Heading>You created a new page called Index</Heading>
-    <p>You can visit this page by appending \"/Index\" to your URL</p>
-    <p>You can edit this page in "/pages/index</p>
-    <p>For information on Next.js dynamic routing <a href=\"https://nextjs.org/learn/basics/navigate-between-pages\" target=\"_blank\">check out their documentation</a></p>
-    <p>For information about navigation within the admin frame, <a href=\"https://help.shopify.com/en/api/embedded-apps/app-extensions/navigation/create-navigation-link\" target=\"_blank\">see the Shopify documentation.</a></p>
+    <EmptyState
+      heading="Manage your inventory transfers"
+      action={{ content: 'Add transfer' }}
+      secondaryAction={{ content: 'Learn more', url: 'https://help.shopify.com' }}
+      image="https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg"
+    >
+      <p>Track and receive your incoming inventory from suppliers.</p>
+    </EmptyState>
   </Page>
 )
-export default Index;`;
+export default Index;`
 
 jest.mock("fs", () => ({
   writeFileSync: jest.fn(),
@@ -26,7 +28,7 @@ jest.mock("fs", () => ({
 }));
 
 it("should call writeFile if file does not exist", () => {
-  generatePage("pages", ["npm", "run-script", "generate-page", "index"]);
+  generatePage(jest.fn(), "pages", ["route", "route", "generate-empty-state-page", "index"]);
   expect(fs.writeFileSync).toHaveBeenCalledWith(
     "pages/index.js",
     content,
@@ -34,8 +36,8 @@ it("should call writeFile if file does not exist", () => {
   );
 });
 
-it("should call not writeFile if file does exist", () => {
-  generatePage("pages", ["npm", "run-script", "generate-page", "test"]);
+it("should not call writeFile if file does exist", () => {
+  generatePage(jest.fn(), "pages", ["route", "route", "generate-empty-state-page", "test"]);
   const writeFileSyncSpy = jest.spyOn(fs, "writeFileSync");
   expect(writeFileSyncSpy).toHaveBeenCalledTimes(0);
 });
