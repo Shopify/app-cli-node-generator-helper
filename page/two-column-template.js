@@ -8,12 +8,13 @@ const ${componentName} = () => (
         <Layout>
           <Layout.Section oneHalf>
             <Card>
-              content
+              Put content here
+              For more information see: https://polaris.shopify.com/components/structure/layout
             </Card>
           </Layout.Section>
           <Layout.Section oneHalf>
             <Card>
-              content
+              Put content here
             </Card>
           </Layout.Section>
         </Layout>

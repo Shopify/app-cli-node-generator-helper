@@ -12,7 +12,8 @@ const ${componentName} = () => (
           description="Description"
         >
           <Card>
-            content
+            Put content here
+            For more information see: https://polaris.shopify.com/components/structure/layout
         </Card>
         </Layout.AnnotatedSection>
       </Layout>
@@ -22,7 +23,7 @@ const ${componentName} = () => (
           description="Description"
         >
           <Card>
-            content
+            Put content here
         </Card>
         </Layout.AnnotatedSection>
       </Layout>
