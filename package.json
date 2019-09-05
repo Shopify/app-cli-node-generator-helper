@@ -19,6 +19,9 @@
   "bin": {
     "generate-node-app": "./index.js"
   },
+  "jest": {
+    "clearMocks": true
+  },
   "bugs": {
     "url": "https://github.com/Shopify/app-cli-node-generator-helper/issues"
   },

@@ -1,5 +1,6 @@
 const fs = require("fs");
 const generatePage = require("../page/generate-page");
+const generateEmptyState = require("../page/empty-state-template");
 
 const content = `import { EmptyState, Page } from "@shopify/polaris";
 const Index = () => (
@@ -7,7 +8,7 @@ const Index = () => (
     <EmptyState
       heading="Manage your inventory transfers"
       action={{ content: 'Add transfer' }}
-      secondaryAction={{ content: 'Learn more', url: 'https://help.shopify.com' }}
+      secondaryAction={{ content: 'Learn more about empty state', url: 'https://polaris.shopify.com/components/structure/empty-state' }}
       image="https://cdn.shopify.com/s/files/1/0757/9955/files/empty-state.svg"
     >
       <p>Track and receive your incoming inventory from suppliers.</p>
@@ -18,20 +19,14 @@ export default Index;`
 
 jest.mock("fs", () => ({
   writeFileSync: jest.fn(),
-  existsSync: page => {
-    if (page === "pages/test.js") {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  existsSync: page => page === "pages/test.js" ? true : false
 }));
 
 it("should call writeFile if file does not exist", () => {
-  generatePage(jest.fn(), "pages", ["route", "route", "generate-empty-state-page", "index"]);
+  generatePage(generateEmptyState, "pages", ["route", "route", "generate-empty-state-page", "index"]);
   expect(fs.writeFileSync).toHaveBeenCalledWith(
     "pages/index.js",
-    content,
+    expect.any(String),
     expect.any(Function)
   );
 });
