@@ -5,30 +5,30 @@ const createSettingsPageTemplate = handle => {
   return `import { Card, Layout, Page } from '@shopify/polaris';
 
 const ${componentName} = () => (
-    <Page>
-      <Layout>
-        <Layout.AnnotatedSection
-          title="Title"
-          description="Description"
-        >
-          <Card>
-            Put content here
-            For more information see: https://polaris.shopify.com/components/structure/layout
+  <Page>
+    <Layout>
+      <Layout.AnnotatedSection
+        title="Title"
+        description="Description"
+      >
+        <Card>
+          <div>Put content here</div>
+          <a href="https://polaris.shopify.com/components/structure/layout">For more information see Polaris docs</a>
         </Card>
-        </Layout.AnnotatedSection>
-      </Layout>
-      <Layout>
-        <Layout.AnnotatedSection
-          title="Title"
-          description="Description"
-        >
-          <Card>
-            Put content here
+      </Layout.AnnotatedSection>
+    </Layout>
+    <Layout>
+      <Layout.AnnotatedSection
+        title="Title"
+        description="Description"
+      >
+        <Card>
+          Put content here
         </Card>
-        </Layout.AnnotatedSection>
-      </Layout>
-    </Page>
-      );
+      </Layout.AnnotatedSection>
+    </Layout>
+  </Page>
+  );
   export default ${componentName};`;
 };
 

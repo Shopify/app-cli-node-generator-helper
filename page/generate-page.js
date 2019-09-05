@@ -4,7 +4,6 @@ const fs = require("fs");
 */
 
 function generatePage(type, dir, args) {
-  console.log('generate-page', args)
   const handle = args[3];
   const page = `${dir}/${handle.toLowerCase()}.js`;
   if (fs.existsSync(page)) {
