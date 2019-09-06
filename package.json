@@ -11,6 +11,7 @@
     "test": "jest"
   },
   "publishConfig": {
+    "name": "@shopify/app-cli-node-generator-helper",
     "access": "public",
     "@shopify:registry": "https://registry.npmjs.org"
   },
