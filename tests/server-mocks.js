@@ -86,7 +86,7 @@ app.prepare().then(() => {
         shop,
         accessToken
       } = ctx.session;
-      await handlers.registerWebhooks(shop, accessToken, 'TEST_TYPE', '/webhooks/test/type');
+      await handlers.registerWebhooks(shop, accessToken, 'TEST_TYPE', '/webhooks/test/type', ApiVersion.July19);
 
       ctx.redirect(\"/\");
     }
@@ -124,9 +124,9 @@ app.prepare().then(() => {
         shop,
         accessToken
       } = ctx.session;
-      await handlers.registerWebhooks(shop, accessToken, 'TEST_TWO', '/webhooks/test/two');
+      await handlers.registerWebhooks(shop, accessToken, 'TEST_TWO', '/webhooks/test/two', ApiVersion.July19);
 
-      await handlers.registerWebhooks(shop, accessToken, 'TEST_TYPE', '/webhooks/test/type');
+      await handlers.registerWebhooks(shop, accessToken, 'TEST_TYPE', '/webhooks/test/type', ApiVersion.July19);
       ctx.redirect(\"/\");
     }
 
