@@ -24,7 +24,7 @@ const generateWebhook = (ast, type) => {
   }
   const code = `await handlers.registerWebhooks(shop, accessToken, '${type}', '${createWebhookUrl(
     type
-  )}'); `;
+  )}', ApiVersion.July19); `;
   sessionAssignment.insertAfter(
     parser(code, { sourceType: "module", allowAwaitOutsideFunction: true })
   );
