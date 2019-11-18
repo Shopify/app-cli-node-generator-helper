@@ -46,11 +46,10 @@ function receiveArgs(args) {
       transform("server/server.js", generateWebhook, type);
       break;
     }
-    case "extension": {
-      const type = args[3];
-      const generateExtension = require("./extension/generate-extension");
+    case "marketing-activity-extension": {
+      const generateExtension = require("./extension/generate-marketing-activity-extension");
       const transform = require("./transform");
-      transform("server/server.js", generateExtension, type);
+      transform("server/server.js", generateExtension);
       break;
     }
     default:
