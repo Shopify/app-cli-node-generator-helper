@@ -12,7 +12,7 @@ const generateMarketingActivityExtension = ast => {
   let lastRoutesCall;
   let lastImport;
   let extensionRouterExists;
-  let hmacImportExists;
+  let hmacImportExists = false;
 
   const hmacVerificationImport = `import verifyHmacRequest from "./api/hmac-verification.js";`;
   const extensionImport = `import marketingActivitiesRouter from "./api/marketing-activities.js";`;
@@ -54,7 +54,7 @@ const generateMarketingActivityExtension = ast => {
 
   traverse(ast, {
     ImportDeclaration(path) {
-      if (get(path, ["node", "source", "value"]) === './hmac-verification-template.js') {
+      if (get(path, ["node", "source", "value"]) === './api/hmac-verification.js') {
         hmacImportExists = true;
       }
       lastImport = path;
@@ -113,7 +113,7 @@ const generateMarketingActivityExtension = ast => {
         sourceType: "module"
       })
     );
-      mainRouterConfiguration.insertAfter(
+    mainRouterConfiguration.insertAfter(
       parseExpression(routerConfiguration, {
         sourceType: "module"
       })
@@ -123,7 +123,6 @@ const generateMarketingActivityExtension = ast => {
         sourceType: "module"
       })
     );
-
   }
 
   return ast;

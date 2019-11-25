@@ -41,7 +41,6 @@ const transformedAuth = `createShopifyAuth({
 
 const server = `import * as handlers from "./handlers/index";
 const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
-
 dotenv.config();
 app.prepare().then(() => {
   const server = new Koa();
@@ -61,6 +60,8 @@ app.prepare().then(() => {
     ctx.respond = false;
     ctx.res.statusCode = 200;
   });
+  server.use(router.allowedMethods());
+  server.use(router.routes());
 });`;
 
 const transformedWithWebhooksandEnv = `import * as handlers from \"./handlers/index\";
@@ -101,6 +102,8 @@ app.prepare().then(() => {
     ctx.respond = false;
     ctx.res.statusCode = 200;
   });
+  server.use(router.allowedMethods());
+  server.use(router.routes());
 });`;
 
 const transformedWithMoreWebhooks = `import * as handlers from \"./handlers/index\";
@@ -143,6 +146,8 @@ app.prepare().then(() => {
     ctx.respond = false;
     ctx.res.statusCode = 200;
   });
+  server.use(router.allowedMethods());
+  server.use(router.routes());
 });`;
 
 module.exports = {
