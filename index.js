@@ -47,7 +47,7 @@ function receiveArgs(args) {
       break;
     }
     case "marketing-activity-extension": {
-      const generateExtension = require("./extension/generate-marketing-activity-extension");
+      const generateExtension = require("./marketing_activity_extension/generate-marketing-activity-extension");
       const transform = require("./transform");
       transform("server/server.js", generateExtension);
       break;

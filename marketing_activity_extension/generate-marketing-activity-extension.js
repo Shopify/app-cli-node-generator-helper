@@ -15,25 +15,19 @@ const generateMarketingActivityExtension = ast => {
   let hmacImportExists;
 
   const hmacVerificationImport = `import verifyHmacRequest from "./api/hmac-verification.js";`;
-  const extensionImport = `import * as marketingActivities from "./api/marketing-activities.js";`;
+  const extensionImport = `import marketingActivitiesRouter from "./api/marketing-activities.js";`;
   const routerCreation = `const apiRouter = new Router();`;
   const routerConfiguration = `
     apiRouter.prefix("/api");
     apiRouter.use('/', async (ctx, next) => {
       await verifyHmacRequest(SHOPIFY_API_SECRET, ctx, next);
     });
-    apiRouter.patch("/marketing_activities/resume", marketingActivities.handleResume);
-    apiRouter.patch("/marketing_activities/pause", marketingActivities.handlePause);
-    apiRouter.patch("/marketing_activities/delete", marketingActivities.handleDelete);
-    apiRouter.post("/marketing_activities/republish", marketingActivities.handleRepublish);
-    apiRouter.post("/marketing_activities/preload_form_data", marketingActivities.handlePreloadFormData);
-    apiRouter.post("/marketing_activities/preview", marketingActivities.handlePreview);
-    apiRouter.post("/marketing_activities/errors", marketingActivities.handleErrors);`
+    apiRouter.use(marketingActivitiesRouter.routes());`
   const serverRouterConfiguration = `server.use(apiRouter.routes());`
 
   // Write endpoint handling file
   const apiDir = 'server/api'
-  const apiFile = `${apiDir}/${type}.js`;
+  const apiFile = `${apiDir}/marketing-activities.js`;
   if (fs.existsSync(apiFile)) {
     process.exitCode = 2;
   } else {
@@ -119,7 +113,7 @@ const generateMarketingActivityExtension = ast => {
         sourceType: "module"
       })
     );
-    mainRouterConfiguration.insertAfter(
+      mainRouterConfiguration.insertAfter(
       parseExpression(routerConfiguration, {
         sourceType: "module"
       })
