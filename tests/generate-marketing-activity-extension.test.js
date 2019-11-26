@@ -75,12 +75,21 @@ it("should not create and configrue api router if api router already exists", ()
     .toEqual(1)
 });
 
-it("should not import hmac middleware if it already exists", () => {
+it("should not import hmac middleware if it is already imported", () => {
   generateMarketingActivityExtension(ast);
   const parsedAst = generateMarketingActivityExtension(ast);
   const newCode = generate(parsedAst).code;
 
   expect(count(newCode, 'import verifyHmacRequest from "./api/hmac-verification.js'))
+    .toEqual(1)
+});
+
+it("should not import endpoints file if it is already imported", () => {
+  generateMarketingActivityExtension(ast);
+  const parsedAst = generateMarketingActivityExtension(ast);
+  const newCode = generate(parsedAst).code;
+
+  expect(count(newCode, 'import marketingActivitiesRouter from "./api/marketing-activities.js";'))
     .toEqual(1)
 });
 

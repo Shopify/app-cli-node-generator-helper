@@ -12,21 +12,22 @@ const generateMarketingActivityExtension = ast => {
   let lastRoutesCall;
   let lastImport;
   let extensionRouterExists;
-  let hmacImportExists = false;
+  let hmacImportExists;
+  let extensionImportExists;
 
   const hmacVerificationImport = `import verifyHmacRequest from "./api/hmac-verification.js";`;
   const extensionImport = `import marketingActivitiesRouter from "./api/marketing-activities.js";`;
   const routerCreation = `const apiRouter = new Router();`;
   const routerConfiguration = `
     apiRouter.prefix("/api");
-    apiRouter.use('/', async (ctx, next) => {
+    apiRouter.use("/", async (ctx, next) => {
       await verifyHmacRequest(SHOPIFY_API_SECRET, ctx, next);
     });
     apiRouter.use(marketingActivitiesRouter.routes());`
   const serverRouterConfiguration = `server.use(apiRouter.routes());`
 
   // Write endpoint handling file
-  const apiDir = 'server/api'
+  const apiDir = "server/api";
   const apiFile = `${apiDir}/marketing-activities.js`;
   if (fs.existsSync(apiFile)) {
     process.exitCode = 2;
@@ -54,8 +55,10 @@ const generateMarketingActivityExtension = ast => {
 
   traverse(ast, {
     ImportDeclaration(path) {
-      if (get(path, ["node", "source", "value"]) === './api/hmac-verification.js') {
+      if (get(path, ["node", "source", "value"]) === "./api/hmac-verification.js") {
         hmacImportExists = true;
+      } else if (get(path, ["node", "source", "value"]) === "./api/marketing-activities.js") {
+        extensionImportExists = true;
       }
       lastImport = path;
     }
@@ -95,18 +98,19 @@ const generateMarketingActivityExtension = ast => {
     }
   });
 
+  let imports = '';
   if (!hmacImportExists) {
-    lastImport.insertAfter(
-      parseExpression(hmacVerificationImport, {
-        sourceType: "module"
-      })
-    );
+    imports += hmacVerificationImport;
+  }
+  if (!extensionImportExists) {
+    imports += extensionImport;
   }
   lastImport.insertAfter(
-    parseExpression(extensionImport, {
+    parseExpression(imports, {
       sourceType: "module"
     })
   );
+
   if (!extensionRouterExists) {
     mainRouterDeclaration.insertAfter(
       parseExpression(routerCreation, {
