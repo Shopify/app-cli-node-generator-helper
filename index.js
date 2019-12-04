@@ -46,6 +46,12 @@ function receiveArgs(args) {
       transform("server/server.js", generateWebhook, type);
       break;
     }
+    case "marketing-activity-extension": {
+      const generateExtension = require("./marketing_activity_extension/generate-marketing-activity-extension");
+      const transform = require("./transform");
+      transform("server/server.js", generateExtension);
+      break;
+    }
     default:
       console.log("Please provide a command");
   }

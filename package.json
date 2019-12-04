@@ -8,7 +8,7 @@
     "url": "git+https://github.com/Shopify/app-cli-node-generator-helper.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --clearCache"
   },
   "publishConfig": {
     "name": "@shopify/app-cli-node-generator-helper",
