@@ -40,7 +40,7 @@ const transformedAuth = `createShopifyAuth({
 });`;
 
 const server = `import * as handlers from "./handlers/index";
-const { SHOPIFY_API_SECRET_KEY, SHOPIFY_API_KEY } = process.env;
+const { SHOPIFY_API_SECRET, SHOPIFY_API_KEY } = process.env;
 dotenv.config();
 app.prepare().then(() => {
   const server = new Koa();
@@ -66,7 +66,7 @@ app.prepare().then(() => {
 
 const transformedWithWebhooksandEnv = `import * as handlers from \"./handlers/index\";
 const {
-  SHOPIFY_API_SECRET_KEY,
+  SHOPIFY_API_SECRET,
   SHOPIFY_API_KEY
 } = process.env;
 import { receiveWebhook } from '@shopify/koa-shopify-webhooks';
@@ -76,7 +76,7 @@ app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
   const webhook = receiveWebhook({
-    secret: SHOPIFY_API_SECRET_KEY
+    secret: SHOPIFY_API_SECRET
   });
 
   server.use(createShopifyAuth({
@@ -108,7 +108,7 @@ app.prepare().then(() => {
 
 const transformedWithMoreWebhooks = `import * as handlers from \"./handlers/index\";
 const {
-  SHOPIFY_API_SECRET_KEY,
+  SHOPIFY_API_SECRET,
   SHOPIFY_API_KEY
 } = process.env;
 import { receiveWebhook } from '@shopify/koa-shopify-webhooks';
@@ -117,7 +117,7 @@ app.prepare().then(() => {
   const server = new Koa();
   const router = new Router();
   const webhook = receiveWebhook({
-    secret: SHOPIFY_API_SECRET_KEY
+    secret: SHOPIFY_API_SECRET
   });
   server.use(createShopifyAuth({
     scopes: [\"read_products\", \"write_products\"],
