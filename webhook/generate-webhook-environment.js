@@ -3,7 +3,7 @@ const traverse = require("@babel/traverse").default;
 const get = require("lodash.get");
 
 const generateWebhookEnvironment = ast => {
-  const code = `const webhook = receiveWebhook({secret: SHOPIFY_API_SECRET_KEY});`;
+  const code = `const webhook = receiveWebhook({secret: SHOPIFY_API_SECRET});`;
   const importPackage = `import { receiveWebhook } from '@shopify/koa-shopify-webhooks';`;
   let webhookDeclaration;
   let routerDeclaration;
