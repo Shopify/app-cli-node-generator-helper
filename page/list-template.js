@@ -6,7 +6,7 @@ const createListTemplate = handle => {
   import { Avatar, Card, Button, ResourceItem, ResourceList, TextStyle, TextField, Filters } from '@shopify/polaris';
 
 
-  export default function ${componentName} {
+  export default function ${componentName}() {
     const [selectedItems, setSelectedItems] = useState([]);
     const [sortValue, setSortValue] = useState('DATE_MODIFIED_DESC');
     const [taggedWith, setTaggedWith] = useState('VIP');
