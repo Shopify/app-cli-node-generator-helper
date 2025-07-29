@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Shopify/app-cli-node-generator-helper#readme",
   "devDependencies": {
-    "jest": "^24.9.0"
+    "jest": "^29.6.1"
   },
   "dependencies": {
     "@babel/parser": "^7.7.4",
